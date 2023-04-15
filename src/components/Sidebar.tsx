@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 type SidebarProps = {
 	header: string;
@@ -34,13 +35,15 @@ const Sidebar = (props: SidebarProps) => {
 					>
 						<hr className="my-4 md:min-w-full" />
 						{/* Heading */}
+
 						<h6 className="md:min-w-full text-slate-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
 							General
 						</h6>
+
 						{/* Navigation */}
 
 						<ul className="md:flex-col md:min-w-full flex flex-col list-none">
-							<li className="items-center">
+							<li className="items-center cursor-pointer">
 								<h2
 									className={
 										"text-xs uppercase py-3 font-bold block " +
@@ -62,7 +65,7 @@ const Sidebar = (props: SidebarProps) => {
 								</h2>
 							</li>
 
-							<li className="items-center">
+							<li className="items-center cursor-pointer">
 								<h2
 									className={
 										"text-xs uppercase py-3 font-bold block " +
@@ -84,6 +87,7 @@ const Sidebar = (props: SidebarProps) => {
 									Settings
 								</h2>
 							</li>
+
 							<li className="items-center">
 								<h2
 									className={
