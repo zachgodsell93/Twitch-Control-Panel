@@ -7,11 +7,9 @@ export const Login = (props?: LoginPropTypes) => {
 	const [incorrectPassword, setIncorrectPassword] = useState(false);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [errorCode, setErrorCode] = useState("");
 
 	const navigate = useNavigate();
-	const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
-		e.preventDefault();
+	const handleSubmit = () => {
 		const auth = getAuth();
 		signInWithEmailAndPassword(auth, email, password)
 			.then(async (response) => {
@@ -21,7 +19,6 @@ export const Login = (props?: LoginPropTypes) => {
 				if (error.code.includes("auth/wrong-password")) {
 					setIncorrectPassword(true);
 				} else {
-					setErrorCode(error.code);
 					alert(`The login details provided don't match any in our system`);
 				}
 			});
@@ -95,6 +92,7 @@ export const Login = (props?: LoginPropTypes) => {
 									<button
 										className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 										type="submit"
+										onClick={handleSubmit}
 									>
 										Sign In
 									</button>

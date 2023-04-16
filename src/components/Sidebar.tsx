@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { auth } from "../utils/firbase.config";
 
 type SidebarProps = {
 	header: string;
@@ -9,6 +10,8 @@ type SidebarProps = {
 const Sidebar = (props: SidebarProps) => {
 	const { header } = props;
 	const [collapseShow, setCollapseShow] = useState("hidden");
+
+	const logout = () => {};
 
 	return (
 		<>
@@ -36,10 +39,6 @@ const Sidebar = (props: SidebarProps) => {
 						<hr className="my-4 md:min-w-full" />
 						{/* Heading */}
 
-						<h6 className="md:min-w-full text-slate-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-							General
-						</h6>
-
 						{/* Navigation */}
 
 						<ul className="md:flex-col md:min-w-full flex flex-col list-none">
@@ -47,7 +46,7 @@ const Sidebar = (props: SidebarProps) => {
 								<h2
 									className={
 										"text-xs uppercase py-3 font-bold block " +
-										(window.location.href.indexOf("/admin/dashboard") !== -1
+										(window.location.href.indexOf("/dashboard") !== -1
 											? "text-lightBlue-500 hover:text-lightBlue-600"
 											: "text-slate-700 hover:text-slate-500")
 									}
@@ -123,6 +122,7 @@ const Sidebar = (props: SidebarProps) => {
 						<button
 							className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 							type="button"
+							onClick={() => auth.signOut()}
 						>
 							Logout
 						</button>

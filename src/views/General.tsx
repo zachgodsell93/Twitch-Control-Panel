@@ -10,4 +10,4 @@ const General = (props?: GeneralProps) => {
 
 type GeneralProps = {};
 
-export default General;
+export { General };

@@ -9,18 +9,23 @@ import {
 	Navigate,
 } from "react-router-dom";
 import { Chat } from "./views/Chat";
-import General from "./views/General";
+import { General } from "./views/General";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { Login } from "./views/Login";
+import { Authenticated } from "./layouts/Authenticated";
 
 function App() {
 	return (
 		<Router>
-			<Sidebar header="test" />
-			<div className="ml-0 lg:ml-64 bg-slate-700 bg-no-repeat bg-full min-h-screen h-full">
-				<Routes>
-					<Route path="/" element={<General />} />
-					<Route path="/chat" element={<Chat />} />
-				</Routes>
-			</div>
+			<Routes>
+				<Route element={<PrivateRoute />}>
+					<Route path="/" element={<Authenticated />}>
+						<Route path="/dashboard" element={<General />} />
+						<Route path="/chat" element={<Chat />} />
+					</Route>
+				</Route>
+				<Route path="/login" element={<Login />} />
+			</Routes>
 		</Router>
 	);
 }
