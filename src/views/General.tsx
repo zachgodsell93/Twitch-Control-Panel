@@ -1,8 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const General = (props: GeneralProps) => {
-	return <div>General</div>;
+const General = (props?: GeneralProps) => {
+	return (
+		<div>
+			<div></div>
+		</div>
+	);
 };
 
 type GeneralProps = {};

@@ -24,7 +24,7 @@ const Sidebar = (props: SidebarProps) => {
 					</button>
 					{/* Brand */}
 					<h2 className="md:block cursor-pointer text-left md:pb-2 text-slate-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0">
-						DojoDev Twitch Bot
+						DojoDev Twitch Panel
 					</h2>
 					{/* Collapse */}
 					<div
@@ -118,7 +118,7 @@ const Sidebar = (props: SidebarProps) => {
 
 						{/* Heading */}
 						<h6 className="md:min-w-full text-slate-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-							Documentation
+							Github
 						</h6>
 						<button
 							className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
