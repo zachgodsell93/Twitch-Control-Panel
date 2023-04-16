@@ -1,6 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
 import Sidebar from "./components/Sidebar";
 import {
 	BrowserRouter as Router,
@@ -9,10 +7,11 @@ import {
 	Navigate,
 } from "react-router-dom";
 import { Chat } from "./views/Chat";
-import { General } from "./views/General";
+import { Dashboard } from "./views/Dashboard";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { Login } from "./views/Login";
 import { Authenticated } from "./layouts/Authenticated";
+import { Settings } from "./views/Settings";
 
 function App() {
 	return (
@@ -20,8 +19,9 @@ function App() {
 			<Routes>
 				<Route element={<PrivateRoute />}>
 					<Route path="/" element={<Authenticated />}>
-						<Route path="/dashboard" element={<General />} />
+						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/chat" element={<Chat />} />
+						<Route path="/settings" element={<Settings />} />
 					</Route>
 				</Route>
 				<Route path="/login" element={<Login />} />

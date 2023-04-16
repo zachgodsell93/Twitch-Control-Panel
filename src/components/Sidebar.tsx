@@ -3,15 +3,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../utils/firbase.config";
 
-type SidebarProps = {
-	header: string;
-};
+type SidebarProps = {};
 
-const Sidebar = (props: SidebarProps) => {
-	const { header } = props;
+const Sidebar: React.FC<SidebarProps> = (props) => {
 	const [collapseShow, setCollapseShow] = useState("hidden");
 
-	const logout = () => {};
+	const logout: Function = () => {
+		auth.signOut();
+	};
 
 	return (
 		<>
@@ -42,50 +41,53 @@ const Sidebar = (props: SidebarProps) => {
 						{/* Navigation */}
 
 						<ul className="md:flex-col md:min-w-full flex flex-col list-none">
-							<li className="items-center cursor-pointer">
-								<h2
-									className={
-										"text-xs uppercase py-3 font-bold block " +
-										(window.location.href.indexOf("/dashboard") !== -1
-											? "text-lightBlue-500 hover:text-lightBlue-600"
-											: "text-slate-700 hover:text-slate-500")
-									}
-									onClick={() => setCollapseShow("hidden")}
-								>
-									<i
+							<Link to="/dashboard">
+								<li className="items-center cursor-pointer">
+									<h2
 										className={
-											"fas fa-tv mr-2 text-sm " +
+											"text-xs uppercase py-3 font-bold block " +
 											(window.location.href.indexOf("/dashboard") !== -1
-												? "opacity-75"
-												: "text-slate-300")
+												? "text-lightBlue-500 hover:text-lightBlue-600"
+												: "text-slate-700 hover:text-slate-500")
 										}
-									></i>{" "}
-									Dashboard
-								</h2>
-							</li>
-
-							<li className="items-center cursor-pointer">
-								<h2
-									className={
-										"text-xs uppercase py-3 font-bold block " +
-										(window.location.href.indexOf("/dashboard/settings") !== -1
-											? "text-lightBlue-500 hover:text-lightBlue-600"
-											: "text-slate-700 hover:text-slate-500")
-									}
-									onClick={() => setCollapseShow("hidden")}
-								>
-									<i
+										onClick={() => setCollapseShow("hidden")}
+									>
+										<i
+											className={
+												"fas fa-tv mr-2 text-sm " +
+												(window.location.href.indexOf("/dashboard") !== -1
+													? "opacity-75"
+													: "text-slate-300")
+											}
+										></i>{" "}
+										Dashboard
+									</h2>
+								</li>
+							</Link>
+							<Link to="/settings">
+								<li className="items-center cursor-pointer">
+									<h2
 										className={
-											"fas fa-tools mr-2 text-sm " +
-											(window.location.href.indexOf("/dashboard/settings") !==
-											-1
-												? "opacity-75"
-												: "text-slate-300")
+											"text-xs uppercase py-3 font-bold block " +
+											(window.location.href.indexOf("/settings") !== -1
+												? "text-lightBlue-500 hover:text-lightBlue-600"
+												: "text-slate-700 hover:text-slate-500")
 										}
-									></i>{" "}
-									Settings
-								</h2>
-							</li>
+										onClick={() => setCollapseShow("hidden")}
+									>
+										<i
+											className={
+												"fas fa-tools mr-2 text-sm " +
+												(window.location.href.indexOf("/dashboard/settings") !==
+												-1
+													? "opacity-75"
+													: "text-slate-300")
+											}
+										></i>{" "}
+										Settings
+									</h2>
+								</li>
+							</Link>
 
 							<li className="items-center">
 								<h2
@@ -122,7 +124,7 @@ const Sidebar = (props: SidebarProps) => {
 						<button
 							className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 							type="button"
-							onClick={() => auth.signOut()}
+							onClick={() => logout()}
 						>
 							Logout
 						</button>

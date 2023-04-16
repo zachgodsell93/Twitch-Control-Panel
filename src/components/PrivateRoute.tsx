@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate, Outlet } from "react-router-dom";
 import { auth } from "../utils/firbase.config";
 
-const PrivateRoute = (props: PrivateRouterPropTypes) => {
+const PrivateRoute: React.FC<PrivateRouterPropTypes> = (props) => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	let navigate = useNavigate();
 
