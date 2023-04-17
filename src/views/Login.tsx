@@ -97,6 +97,17 @@ export const Login = (props?: LoginPropTypes) => {
 										Sign In
 									</button>
 								</div>
+								<div className="relative w-full mb-3 pt-10">
+									<label
+										className="block uppercase text-slate-600 text-xs font-bold mb-2"
+										htmlFor="grid-password"
+									>
+										Don't have an account?
+									</label>
+									<button className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
+										Register Now
+									</button>
+								</div>
 							</div>
 						</div>
 						<div className="flex flex-wrap mt-6 relative">
