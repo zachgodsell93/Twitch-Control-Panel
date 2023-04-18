@@ -14,6 +14,9 @@ const SettingsCard: React.FC<SettingsCardProps> = (props) => {
 		"channel:read:goals",
 		"chat:edit",
 		"chat:read",
+		"moderator:read:followers",
+		"channel:read:subscriptions",
+		"channel:read:redemptions",
 	];
 
 	const twitchAuthorize = () => {

@@ -1,35 +1,85 @@
 import React, { useState } from "react";
-
+import { auth } from "../../utils/firbase.config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 interface RegisterProps {
 	modalOpen: (data: boolean) => void;
 }
 
 const RegisterModal: React.FC<RegisterProps> = (props) => {
 	const [email, setEmail] = useState("");
+	const [emailFormat, setEmailFormat] = useState(true);
 	const [password, setPassword] = useState("");
+	const [password2, setPassword2] = useState("");
+	const [passwordError, setPasswordError] = useState({
+		status: false,
+		message: "",
+	});
+
+	const validateEmail = (email: string) => {
+		const re: RegExp = /\S+@\S+\.\S+/;
+		return re.test(email);
+	};
 
 	const checkPassword = (password: string, password2: string) => {
-		if (password.length <= 8) {
+		if (password.length >= 8) {
 			if (password === password2) {
 				if (
 					password.match(/[a-z]/) &&
 					password.match(/[A-Z]/) &&
 					password.match(/\d/)
 				) {
+					setPasswordError({
+						status: false,
+						message: "",
+					});
+					return true;
 				} else {
-					console.log(
-						"Password must contain an uppercase, lowercase and a number"
-					);
+					setPasswordError({
+						status: true,
+						message:
+							"Password must contain an uppercase, lowercase and a number",
+					});
+
+					return false;
 				}
 			} else {
-				console.log("Passwords do not match");
+				setPasswordError({
+					status: true,
+					message: "Passwords do not match",
+				});
+				return false;
 			}
 		} else {
-			console.log("Password needs to be at least 8 characters long");
+			setPasswordError({
+				status: true,
+				message: "Password needs to be at least 8 characters long",
+			});
+			return false;
 		}
 	};
 
-	const handleUserRegistration = () => {};
+	const handleRegistration = () => {
+		const emailCheck: boolean = validateEmail(email);
+		if (!emailCheck) {
+			setEmailFormat(false);
+		}
+		if (emailCheck) {
+			setEmailFormat(true);
+		}
+		let pwCheck: boolean = checkPassword(password, password2);
+		if (pwCheck && emailCheck) {
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredential) => {
+					// const user = userCredential.user;
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					console.log(errorCode, errorMessage);
+				});
+			console.log("Registration Successful");
+		}
+	};
 
 	const closeModal = () => {
 		props.modalOpen(false);
@@ -60,6 +110,14 @@ const RegisterModal: React.FC<RegisterProps> = (props) => {
 										placeholder="Email"
 										onChange={(e) => setEmail(e.target.value)}
 									/>
+									{emailFormat ? null : (
+										<label
+											className="block uppercase text-red-600 text-xs font-light mb-2"
+											htmlFor="grid-password"
+										>
+											Email needs to be in the correct format
+										</label>
+									)}
 								</div>
 
 								<div className="relative w-full mb-3">
@@ -77,6 +135,14 @@ const RegisterModal: React.FC<RegisterProps> = (props) => {
 										placeholder="Password"
 										onChange={(e) => setPassword(e.target.value)}
 									/>
+									{!passwordError.status ? null : (
+										<label
+											className="block uppercase text-red-600 text-xs font-light mb-2"
+											htmlFor="grid-password"
+										>
+											{passwordError.message}
+										</label>
+									)}
 								</div>
 
 								<div className="relative w-full mb-3">
@@ -92,7 +158,7 @@ const RegisterModal: React.FC<RegisterProps> = (props) => {
 										id="password2"
 										className="border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
 										placeholder="Re-enter Password"
-										onChange={(e) => setPassword(e.target.value)}
+										onChange={(e) => setPassword2(e.target.value)}
 									/>
 								</div>
 
@@ -100,7 +166,7 @@ const RegisterModal: React.FC<RegisterProps> = (props) => {
 									<button
 										className="bg-slate-800 text-white active:bg-slate-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 										type="submit"
-										onClick={handleUserRegistration}
+										onClick={handleRegistration}
 									>
 										Register
 									</button>
