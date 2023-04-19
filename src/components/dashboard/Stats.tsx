@@ -38,7 +38,7 @@ export const Stats: React.FC<StatsProps> = (props) => {
 								<CardStats title="Subscribers" stat={subscriberCount} />
 							</div>
 							<div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-								<CardStats title="Followers" stat="3" />
+								<CardStats title="Followers" stat="2" />
 							</div>
 							<div className="w-full lg:w-6/12 xl:w-3/12 px-4">
 								<CardStats title="Back Orders" stat="8" />

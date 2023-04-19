@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { RegisterModal } from "../components/login/RegisterModal";
+import { UserAPI } from "../utils/API";
 
 export const Login = (props?: LoginPropTypes) => {
 	const [incorrectPassword, setIncorrectPassword] = useState(false);

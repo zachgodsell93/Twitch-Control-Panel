@@ -12,6 +12,8 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import { Login } from "./views/Login";
 import { Authenticated } from "./layouts/Authenticated";
 import { Settings } from "./views/Settings";
+import { TwitchAuthHandler } from "./views/TwitchAuthHandler";
+import dotenv from "dotenv";
 
 function App() {
 	return (
@@ -22,6 +24,7 @@ function App() {
 						<Route path="/dashboard" element={<Dashboard />} />
 						<Route path="/chat" element={<Chat />} />
 						<Route path="/settings" element={<Settings />} />
+						<Route path="/twitchAuthSuccess" element={<TwitchAuthHandler />} />
 					</Route>
 				</Route>
 				<Route path="/login" element={<Login />} />

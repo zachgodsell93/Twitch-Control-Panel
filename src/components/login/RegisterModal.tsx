@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { auth } from "../../utils/firbase.config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { UserAPI } from "../../utils/API";
+import { useNavigate } from "react-router-dom";
 interface RegisterProps {
 	modalOpen: (data: boolean) => void;
 }
@@ -14,6 +16,8 @@ const RegisterModal: React.FC<RegisterProps> = (props) => {
 		status: false,
 		message: "",
 	});
+
+	const navigate = useNavigate();
 
 	const validateEmail = (email: string) => {
 		const re: RegExp = /\S+@\S+\.\S+/;
@@ -58,7 +62,7 @@ const RegisterModal: React.FC<RegisterProps> = (props) => {
 		}
 	};
 
-	const handleRegistration = () => {
+	const handleRegistration = async () => {
 		const emailCheck: boolean = validateEmail(email);
 		if (!emailCheck) {
 			setEmailFormat(false);
@@ -68,9 +72,15 @@ const RegisterModal: React.FC<RegisterProps> = (props) => {
 		}
 		let pwCheck: boolean = checkPassword(password, password2);
 		if (pwCheck && emailCheck) {
-			createUserWithEmailAndPassword(auth, email, password)
+			await createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredential) => {
-					// const user = userCredential.user;
+					const user = userCredential.user;
+					UserAPI.createUser({
+						uid: user.uid,
+						email: email,
+						twitchBroadcasterId: "",
+					});
+					navigate("/login");
 				})
 				.catch((error) => {
 					const errorCode = error.code;
