@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { UserAPI } from "../utils/API";
 type TwitchAuthHandlerProps = {};
 
 const TwitchAuthHandler: React.FC<TwitchAuthHandlerProps> = (props) => {
@@ -13,6 +14,7 @@ const TwitchAuthHandler: React.FC<TwitchAuthHandlerProps> = (props) => {
 		let access_token: string = String(params.get("access_token"));
 		let scope: string = String(params.get("scope"));
 		console.log(access_token);
+		UserAPI.updateUser("", { twitchToken: access_token });
 	}, []);
 	return (
 		<div className="flex flex-wrap">
