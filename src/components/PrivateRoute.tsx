@@ -5,20 +5,20 @@ import { useNavigate, Outlet } from "react-router-dom";
 import { auth } from "../utils/firbase.config";
 
 const PrivateRoute: React.FC<PrivateRouterPropTypes> = (props) => {
-	const [loggedIn, setLoggedIn] = useState(false);
-	let navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+  let navigate = useNavigate();
 
-	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				setLoggedIn(true);
-			} else {
-				navigate("/login");
-			}
-		});
-	}, []);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setLoggedIn(true);
+      } else {
+        navigate("/login");
+      }
+    });
+  }, []);
 
-	return <>{loggedIn ? <Outlet /> : <></>}</>;
+  return <>{loggedIn ? <Outlet /> : <></>}</>;
 };
 
 type PrivateRouterPropTypes = {};

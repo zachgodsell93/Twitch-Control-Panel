@@ -1,10 +1,10 @@
 import React from "react";
 import Sidebar from "./components/Sidebar";
 import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Navigate,
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
 } from "react-router-dom";
 import { Chat } from "./views/Chat";
 import { Dashboard } from "./views/Dashboard";
@@ -16,21 +16,21 @@ import { TwitchAuthHandler } from "./views/TwitchAuthHandler";
 import dotenv from "dotenv";
 
 function App() {
-	return (
-		<Router>
-			<Routes>
-				<Route element={<PrivateRoute />}>
-					<Route path="/" element={<Authenticated />}>
-						<Route path="/dashboard" element={<Dashboard />} />
-						<Route path="/chat" element={<Chat />} />
-						<Route path="/settings" element={<Settings />} />
-						<Route path="/twitchAuthSuccess" element={<TwitchAuthHandler />} />
-					</Route>
-				</Route>
-				<Route path="/login" element={<Login />} />
-			</Routes>
-		</Router>
-	);
+  return (
+    <Router>
+      <Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Authenticated />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/twitchAuthSuccess" element={<TwitchAuthHandler />} />
+          </Route>
+        </Route>
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
